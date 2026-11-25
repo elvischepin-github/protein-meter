@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Track daily protein intake toward an evidence-based muscle-growth target.">
+<meta name="theme-color" content="#ff5b3a">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Protein Meter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header><h1>Protein meter</h1>
+    <div class="nav"><button class="nb" id="prev" aria-label="Previous day">‹</button><span class="date" id="date"></span><button class="nb" id="next" aria-label="Next day">›</button></div>
+  </header>
+  <button class="past" id="past" hidden>Editing a past day · Back to today</button>
+
+  <section class="top">
+    <details id="settings">
+      <summary><span>Your daily target</span><span class="sv" id="sumVal"></span></summary>
+      <div class="result"><div><span class="rt" id="rTarget">0</span><span class="ru"> g/day</span></div><div class="rr" id="rRange"></div></div>
+      <div class="grid2 one">
+        <div><label for="weight">Body weight, kg</label><input id="weight" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" autocomplete="off" min="30" max="250" step="0.1"></div>
+      </div>
+      <label class="glab">Aim · for muscle growth, 1.6–2.2 g/kg</label>
+      <div class="seg" id="aim" role="radiogroup" aria-label="Where in the range"></div>
+    </details>
+  </section>
+  <div class="meter">
+    <div class="tube" aria-hidden="true">
+      <div class="liquid" id="liq"><svg viewBox="0 0 200 14" preserveAspectRatio="none"><path fill="var(--b)" d="M0 7 Q12.5 0 25 7 T50 7 T75 7 T100 7 T125 7 T150 7 T175 7 T200 7 V14 H0Z"/></svg></div>
+      <div class="shine"></div>
+      <div class="ticks" id="ticks"></div>
+    </div>
+    <div class="stats">
+      <div>
+        <p class="lab" id="eatLab">Eaten today</p>
+        <div class="big" id="eaten">0<small>g</small></div>
+        <div class="of" id="of">of 180 g</div>
+      </div>
+      <div>
+        <p class="lab" id="leftLab">Left to go</p>
+        <div class="left" id="left">180 g</div>
+        <div class="bar"><b id="bar"></b></div>
+        <div class="pct" id="pct">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adds" id="adds"></div>
+  <form class="custom" id="customForm">
+    <input id="custom" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" autocomplete="off" min="0" step="0.5" placeholder="Custom amount, g" aria-label="Custom amount in grams">
+    <button type="submit">Add</button>
+  </form>
+  <div class="row">
+    <button class="ghost" id="undo">Undo last</button>
+    <button class="ghost" id="minus">−1 g</button>
+  </div>
+
+  <section>
+    <h2 id="logTitle">Today's log</h2>
+    <ul class="log" id="log"></ul>
+    <button class="ghost danger" id="reset">Clear today</button>
+  </section>
+
+  <section>
+    <h2>Last 7 days <span class="hint">· tap a day to edit it</span></h2>
+    <div class="week" id="week"></div>
+  </section>
+
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
